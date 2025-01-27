@@ -7,32 +7,37 @@ public abstract class Car implements Movable {
     protected double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
     private String modelName; // The car model name
-    protected int x;
-    protected int y;
+    protected double x;
+    protected double y;
     protected int direction; // 0 = north, 1 = east, 2 = south, 3 = west
 
 
-    public Car(int nrDoors, double enginePower, Color color, String modelName, int x, int y) {
+    public Car(int nrDoors, double enginePower, Color color, String modelName) {
             this.nrDoors = nrDoors;
+            if (enginePower <= 0){
+                throw new IllegalArgumentException("Engine power must be positive");
+            }
             this.enginePower = enginePower;
             this.color = color;
             this.modelName = modelName;
-            this.x = x;
-            this.y = y;
+            this.x = 0;
+            this.y = 0;
             this.direction = 0;
             stopEngine();
     }
 
-    void setPosition(Point p) {
-        this.x = p.x;
-        this.y = p.y;
+    public double getXCoordinate() {
+        return x;
+    }
+
+    public double getYCoordinate() {
+        return y;
     }
 
     public int getDirection() {
         return direction;
     }
 
-    public Point getPosition() { return new Point(x, y);}
 
     public int getNrDoors() {
         return nrDoors;
@@ -73,17 +78,17 @@ public abstract class Car implements Movable {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
 
-    // TODO fix this method according to lab pm
+
     public void gas(double amount){
-        if (amount >= 0 && amount <= 1) {
+        if (amount >= 0 && amount <= 1 && getCurrentSpeed() > 0) {
             incrementSpeed(amount);
         }
         else {
-            throw new IllegalArgumentException("Gas måste vara mellan 0 och 1!");
+            throw new IllegalArgumentException("Gas måste vara mellan 0 och 1 och motorn skall vara igång!");
         }
     }
 
-    // TODO fix this method according to lab pm
+
     public void brake(double amount){
         if (amount >= 0 && amount <= 1) {
             decrementSpeed(amount);
