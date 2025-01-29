@@ -15,7 +15,7 @@ public abstract class Car implements Movable {
     public Car(int nrDoors, double enginePower, Color color, String modelName) {
             this.nrDoors = nrDoors;
             if (enginePower <= 0){
-                throw new IllegalArgumentException("Engine power must be positive");
+                throw new IllegalArgumentException("Engine power must be positive");//Tillåter ej
             }
             this.enginePower = enginePower;
             this.color = color;
@@ -66,11 +66,6 @@ public abstract class Car implements Movable {
     public void stopEngine() {
         currentSpeed = 0;
     }
-
-    public void setCurrentSpeed(double speed){//För att kunna testa intervallet 0 till enginepower
-        currentSpeed = speed;
-    }
-
     public abstract double speedFactor();
 
 

@@ -104,8 +104,8 @@ public class CarTest {
         assertEquals(0,volvo.getCurrentSpeed(),0.0);
         assertThrows(IllegalArgumentException.class, () -> volvo.gas(1));
         //Testar så att motorn måste vara igång innnan man gasar
-        volvo.setCurrentSpeed(100);
-        volvo.gas(1);
+        volvo.startEngine();
+        for (int i=0; i <= 100;i++){volvo.gas(1);}
         assertEquals(100,volvo.getCurrentSpeed(),0.0);
     }
 
