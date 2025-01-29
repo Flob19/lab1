@@ -67,7 +67,7 @@ public abstract class Car implements Movable {
         currentSpeed = 0;
     }
 
-    public void setCurrentSpeed(double speed){
+    public void setCurrentSpeed(double speed){//För att kunna testa intervallet 0 till enginepower
         currentSpeed = speed;
     }
 
