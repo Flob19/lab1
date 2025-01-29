@@ -85,4 +85,27 @@ public class CarTest {
         volvo.turnRight();
         assertEquals(1,volvo.getDirection());
     }
+    @Test
+    public void testgasintervall(){
+        volvo.startEngine();
+        assertThrows(IllegalArgumentException.class, () -> volvo.gas(2));
+        assertThrows(IllegalArgumentException.class, () -> volvo.gas(-1));
+
+    }
+    @Test
+    public void testbrakeintervall(){
+        volvo.startEngine();
+        assertThrows(IllegalArgumentException.class, () -> volvo.brake(2));
+    }
+
+    @Test
+    public void testCurrentSpeed(){
+        volvo.brake(1);
+        assertEquals(0,volvo.getCurrentSpeed(),0.0);
+        assertThrows(IllegalArgumentException.class, () -> volvo.gas(1));//Testar så att motorn måste vara igång
+        volvo.setCurrentSpeed(100);
+        volvo.gas(1);
+        assertEquals(100,volvo.getCurrentSpeed(),0.0);
+    }
+
 }

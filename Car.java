@@ -67,6 +67,10 @@ public abstract class Car implements Movable {
         currentSpeed = 0;
     }
 
+    public void setCurrentSpeed(double speed){
+        currentSpeed = speed;
+    }
+
     public abstract double speedFactor();
 
 
