@@ -47,7 +47,7 @@ public class CarTransport extends Truck implements Loadable<Car> {
         }
     }
 
-
+    @Override
     public void load(Car car){
         if (getPlatformStatus().equals("down") &&
                 !(car instanceof Truck) &&
@@ -59,7 +59,7 @@ public class CarTransport extends Truck implements Loadable<Car> {
                 car.y = this.y;
         } else {throw new IllegalArgumentException("Can not load");}
     }
-
+    @Override
     public Car offLoad(){
         if (getPlatformStatus().equals("down")) {
             Car offLoadedCar = loadedCars.pop();
@@ -72,8 +72,6 @@ public class CarTransport extends Truck implements Loadable<Car> {
     @Override
     public void move() {
         if (getPlatformStatus().equals("up")) {
-            double prevX = this.x;
-            double prevY = this.y;
 
             switch (direction) {
                 case 0:
@@ -90,8 +88,8 @@ public class CarTransport extends Truck implements Loadable<Car> {
             }
 
             for (Car car : loadedCars) {
-                car.x += this.x - prevX;
-                car.y += this.y - prevY;
+                car.x = this.x;
+                car.y = this.y;
             }
         } else { throw new IllegalArgumentException("Can not move while platform is down"); }
     }

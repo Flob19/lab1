@@ -5,7 +5,7 @@ public abstract class Truck extends Car {
         super(nrDoors, enginePower, color, modelName);
     }
 
-
+    @Override
     public double speedFactor() {
         return Math.max(getEnginePower() * 0.01, 0);
     }
