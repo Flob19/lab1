@@ -1,11 +1,9 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.*;
-
 import static org.junit.Assert.*;
 
-public class TruckTest {
+public class Lab2Test {
     private Scania scania;
     private CarTransport transport;
     private Saab95 car1;

@@ -4,15 +4,15 @@ public class AutoRepairShop<T extends Car> implements Loadable<T> {
 
     private final int maxCars;
     private final String shopName;
-    private Stack<T> loadedCars;
+    private ArrayList<T> loadedCars;
 
     public AutoRepairShop(int maxLoad, String shopName){
         maxCars = maxLoad;
-        loadedCars = new Stack<>();
+        this.loadedCars = new ArrayList<>();
         this.shopName = shopName;
     }
 
-    public Stack<T> getLoadedCars() {
+    public ArrayList<T> getLoadedCars() {
         return loadedCars;
     }
 
@@ -24,15 +24,25 @@ public class AutoRepairShop<T extends Car> implements Loadable<T> {
         return maxCars;
     }
 
+    public T removeSpecific(T car) {
+        if (loadedCars.contains(car)) {
+            loadedCars.remove(car);
+            return car;
+        } else {  throw new NoSuchElementException("Car not in shop"); }
+
+    }
+
     @Override
     public T offLoad() {
-        return loadedCars.pop();
+        if (loadedCars.isEmpty()) {
+            throw new NoSuchElementException("No cars to offload");
+        } else { return loadedCars.removeFirst(); }
     }
 
     @Override
     public void load(T car) {
          if (getLoadedCars().size() < getMaxCars()) {
-             loadedCars.push(car);
+             loadedCars.add(car);
          } else {
              throw new IllegalArgumentException("Shop is full");
          }

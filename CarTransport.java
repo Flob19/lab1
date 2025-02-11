@@ -2,7 +2,7 @@ import java.awt.*;
 import java.util.*;
 import java.awt.Point;
 
-public class CarTransport extends Truck implements Loadable<Car> {
+public class CarTransport extends Car implements HasPlatform, Loadable<Car> {
     private String platformStatus;
     private Stack<Car> loadedCars;
     private final int maxCars;
@@ -20,6 +20,11 @@ public class CarTransport extends Truck implements Loadable<Car> {
 
     public Stack<Car> getLoadedCars() {
         return loadedCars;
+    }
+
+    @Override
+    public double speedFactor() {
+        return Math.max(getEnginePower() * 0.01, 0);
     }
 
     @Override
@@ -50,7 +55,8 @@ public class CarTransport extends Truck implements Loadable<Car> {
     @Override
     public void load(Car car){
         if (getPlatformStatus().equals("down") &&
-                !(car instanceof Truck) &&
+                !(car instanceof CarTransport) &&
+                !(car instanceof Scania) && // assuming Scania should not be able to be loaded
                 (maxCars > loadedCars.size()) &&
                 (Math.sqrt(Math.pow(car.getXCoordinate() - this.getXCoordinate(), 2) +
                         Math.pow(car.getYCoordinate() - this.getYCoordinate(), 2)) < 2)) {
